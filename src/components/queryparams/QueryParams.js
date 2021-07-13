@@ -1,12 +1,11 @@
-import React from 'react';
 import {Col, Row} from "antd";
 import styles from './query-params.module.css'
 
 function QueryParams(props) {
     const data = [
-        {name: 'api_key'
-        },
-        {value: 'XXX'}
+        {name: 'api_key', value: 'XXX'},
+        {name: 'lang', value: 'en-EN'},
+
     ]
 
     const getist = (data) => {
@@ -21,7 +20,7 @@ function QueryParams(props) {
     }
 
     return (
-        <div style={{paddingTop: '20px'}}>
+        <div style={{paddingTop: '20px', paddingBottom: '20px'}}>
             <p>Query Params</p>
             <Row>
                 <Col className={styles.table} span={8}>KEY</Col>

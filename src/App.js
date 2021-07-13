@@ -1,8 +1,9 @@
 import {useSelector} from "react-redux";
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import ParamsReceiver from "./components/ParamsReceiver";
+import ParamsReceiver from "./components/params-receiver/ParamsReceiver";
 import QueryParams from "./components/queryparams/QueryParams";
+import ResponseInfo from "./components/response-info/ResponseInfo";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -59,6 +60,7 @@ function App() {
             <Content style={{ padding: '0 24px', minHeight: 280 }}>
               <ParamsReceiver />
               <QueryParams/>
+              <ResponseInfo />
             </Content>
           </Layout>
         </Content>
