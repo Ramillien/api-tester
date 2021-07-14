@@ -7,7 +7,7 @@ import {setQueryParams} from "../../reducers/queryReducer"
 import {useEffect} from "react"
 
 
-function QueryParams(props) {
+function QueryParams() {
     const dispatch = useDispatch()
     const url = useSelector(state => state.query.url)
     const params = useSelector(state => state.query.params)
@@ -24,14 +24,15 @@ function QueryParams(props) {
     }
 
     const getist = (data = []) => {
-        const result = data.map((item, id) => (
+        return data.map((item, id) => (
+            item.key || item.value ?
             <Row key={id}>
-                <Col className={styles.table} span={8}><input className={styles.input} onChange={changeHandler} value={item.key}/></Col>
-                <Col className={styles.table} span={8}><input className={styles.input} onChange={changeHandler} value={item.value}/></Col>
-                <Col className={styles.table} span={8}><input className={styles.input} onChange={changeHandler} value={item.desc}/></Col>
+                <Col className={styles.table} span={8}><input className={styles.input} onChange={changeHandler} value={item?.key || ""}/></Col>
+                <Col className={styles.table} span={8}><input className={styles.input} onChange={changeHandler} value={item?.value || ""}/></Col>
+                <Col className={styles.table} span={8}><input className={styles.input} onChange={changeHandler} value={item?.desc || ""}/></Col>
             </Row>
+                : null
         ))
-        return result
     }
 
     return (

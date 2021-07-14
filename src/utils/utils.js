@@ -1,5 +1,5 @@
 export function searchQueryParams(url) {
-    let query = ''
+    let query = null
     for(let i = 0; i < url.length; i++) {
         if (url[i] === "?"){
             // console.log('indexOf',url.indexOf(url[i]))
@@ -12,8 +12,8 @@ export function searchQueryParams(url) {
 }
 
 export function objToArray(obj){
-    const arr = Object.keys(obj).map(key => {
-        return { key: key, value: obj[key], desc: ''}
+    return Object.keys(obj).map(key => {
+        return  { key: (key && key), value: (obj[key] && obj[key]) , desc: ''}
     })
-    return arr
+
 }
