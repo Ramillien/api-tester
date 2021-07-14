@@ -24,9 +24,75 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Api Tester</title>
   </head>
   <body>
+  <style>
+    body{
+      margin: 0;
+    }
+    .loading {
+      position: absolute;
+      z-index: 900;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      /*background: rgb(2,0,36);*/
+      /*background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(2,0,36,1) 100%);*/
+    }
+    .lds-ripple {
+      display: inline-block;
+      position: relative;
+      z-index: 1000;
+      width: 80px;
+      height: 80px;
+    }
+    .lds-ripple div {
+      position: absolute;
+      border: 4px solid #3a68b1;
+      opacity: 1;
+      border-radius: 50%;
+      animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+    .lds-ripple div:nth-child(2) {
+      animation-delay: -0.5s;
+    }
+    @keyframes lds-ripple {
+      0% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+      }
+      100% {
+        top: 0px;
+        left: 0px;
+        width: 72px;
+        height: 72px;
+        opacity: 0;
+      }
+    }
+    .hide{
+      animation: hide 1s linear;
+    }
+    @keyframes hide {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  </style>
+
+  <div class="loader-page">
+    <div class="lds-ripple"><div></div><div></div></div>
+  </div>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -39,5 +105,21 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+  <script>
+    document.querySelector('.loader-page').classList.add('loading')
+
+    function ready(){
+      document.querySelector('.lds-ripple').classList.add('hide')
+      document.querySelector('.loader-page').classList.add('hide')
+      setTimeout(() => {
+        document.querySelector('.lds-ripple').remove()
+        document.querySelector('.loader-page').remove()
+      }, 1000)
+    }
+
+    window.onload = (event) => {
+      ready()
+    };
+  </script>
   </body>
 </html>
