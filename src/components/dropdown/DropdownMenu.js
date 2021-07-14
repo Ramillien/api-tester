@@ -3,7 +3,7 @@ import { Menu, Dropdown, Button, Space} from 'antd';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 
 function DropdownMenu(props) {
-    const [name, setName] = useState('Get')
+    const [name, setName] = useState('GET')
 
     function handleMenuClick(e) {
         if(e.domEvent.target.innerText){
@@ -14,13 +14,13 @@ function DropdownMenu(props) {
     const menu = (
         <Menu onClick={handleMenuClick}>
             <Menu.Item key="1" icon={<UserOutlined />}>
-                Get
+                GET
             </Menu.Item>
             <Menu.Item key="2" icon={<UserOutlined />}>
-                Post
+                POST
             </Menu.Item>
             <Menu.Item key="3" icon={<UserOutlined />}>
-                Delete
+                DELETE
             </Menu.Item>
         </Menu>
     )
