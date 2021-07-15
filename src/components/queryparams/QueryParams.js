@@ -16,7 +16,10 @@ function QueryParams() {
         const queryParams = searchQueryParams(url)
         const parsed = queryString.parse(queryParams)
         const arr = objToArray(parsed)
-        dispatch(setQueryParams(arr))
+
+        if(arr.length) {
+            dispatch(setQueryParams(arr))
+        }
     },[url, dispatch])
 
     const changeHandler = (e) => {

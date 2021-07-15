@@ -32,11 +32,13 @@ const useFetch = url => {
         axios(url, requestOptions).then(res => {
             if (!skipGetResponseAfterDestroy) {
                 setIsLoading(false)
+                setError(null)
                 setResponse(res)
             }
         }).catch(error => {
             if (!skipGetResponseAfterDestroy) {
                 setIsLoading(false)
+                setResponse(null)
                 setError(error)
             }
         })

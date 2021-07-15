@@ -1,34 +1,37 @@
 import DropdownMenu from "../dropdown/DropdownMenu";
 import {Button, Input} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import { setResponse, setUrl} from "../../reducers/queryReducer";
+import {setError, setResponse, setUrl} from "../../reducers/queryReducer";
 import useFetch from "../../hooks/useFetch";
 import {useEffect} from "react";
 
-function ParamsReceiver(props) {
+function ParamsReceiver() {
     const dispatch = useDispatch()
     const url = useSelector(state => state.query.url)
-    const [{isLoading, response},doFetch] = useFetch(url)
+    const [{isLoading, response, error}, doFetch] = useFetch(url)
+    console.log('response', response, 'error', error)
 
     const changeHandler = (e) => {
-        dispatch(setUrl(e.target.value))
+        if (e.target.value) {
+            dispatch(setUrl(e.target.value))
+        }
     }
 
     const clickHandler = () => {
-        doFetch()
+        if (url) {
+            doFetch()
+        }
     }
 
     useEffect(() => {
-        if(response){
-            dispatch(setResponse(response))
-        }
-
-    },[response, dispatch])
+        dispatch(setResponse(response))
+        dispatch(setError(error))
+    })
 
     return (
         <div style={{display: 'flex'}}>
-            <DropdownMenu />
-            <Input placeholder="Enter request URL" onChange={e => changeHandler(e)} value={url} />
+            <DropdownMenu/>
+            <Input placeholder="Enter request URL" onChange={e => changeHandler(e)} value={url}/>
             <Button disabled={isLoading} onClick={clickHandler} type='primary'>Send</Button>
         </div>
     )
