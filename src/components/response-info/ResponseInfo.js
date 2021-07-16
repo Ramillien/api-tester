@@ -1,6 +1,6 @@
-import {useSelector} from "react-redux";
-import {Card} from 'antd';
-import {useState} from "react";
+import {useSelector} from "react-redux"
+import {Card} from 'antd'
+import {useState} from "react"
 import styles from './response-info.module.css'
 
 
@@ -24,13 +24,13 @@ function ResponseInfo() {
         },
     ]
     const contentListNoTitle = {
-        body: <pre className={styles.pre}>{res ? JSON.stringify(res.data, null, 4) : 'Response'}</pre>,
+        body: <pre className={styles.pre}>{res ? JSON.stringify(res.data || res, null, 4) : 'Response'}</pre>,
         headers: <pre className={styles.pre}>{res ? JSON.stringify(res.headers, null, 4) : 'Headers'}</pre>,
         cookies: <p>cookies content</p>,
     }
 
     const onTabChange = (key, type) => {
-        setState({[type]: key});
+        setState({[type]: key})
     }
 
 

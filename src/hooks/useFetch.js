@@ -1,5 +1,5 @@
-import {useCallback, useEffect, useState} from 'react';
-import axios from 'axios';
+import {useCallback, useEffect, useState} from 'react'
+import axios from 'axios'
 
 const useFetch = url => {
     // const baseUrl = 'https://conduit.productionready.io/api'

@@ -1,9 +1,9 @@
-import DropdownMenu from "../dropdown/DropdownMenu";
-import {Button, Input} from "antd";
-import {useDispatch, useSelector} from "react-redux";
-import {setError, setResponse, setUrl} from "../../reducers/queryReducer";
-import useFetch from "../../hooks/useFetch";
-import {useEffect} from "react";
+import DropdownMenu from "../dropdown/DropdownMenu"
+import {Button, Input} from "antd"
+import {useDispatch, useSelector} from "react-redux"
+import {setError, setResponse, setUrl} from "../../reducers/queryReducer"
+import useFetch from "../../hooks/useFetch"
+import {useEffect} from "react"
 
 function ParamsReceiver() {
     const dispatch = useDispatch()
