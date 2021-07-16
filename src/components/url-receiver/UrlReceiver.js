@@ -25,7 +25,7 @@ function UrlReceiver() {
     useEffect(() => {
         dispatch(setResponse(response))
         dispatch(setError(error))
-    })
+    }, [response, error, dispatch])
 
     return (
         <div style={{display: 'flex'}}>

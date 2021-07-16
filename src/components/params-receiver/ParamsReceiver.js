@@ -41,7 +41,7 @@ function ParamsReceiver() {
             style={{width: '100%'}}
             tabList={tabListNoTitle}
             activeTabKey={state.noTitleKey}
-            tabBarExtraContent={<a href='#'>Unimplemented feature</a>}
+            tabBarExtraContent={<p style={{color: '#1890ff'}}>Unimplemented feature</p>}
             onTabChange={key => {
                 onTabChange(key, 'noTitleKey')
             }}
