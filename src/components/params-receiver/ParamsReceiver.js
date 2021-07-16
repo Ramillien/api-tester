@@ -9,7 +9,7 @@ function ParamsReceiver() {
     const dispatch = useDispatch()
     const url = useSelector(state => state.query.url)
     const [{isLoading, response, error}, doFetch] = useFetch(url)
-    console.log('response', response, 'error', error)
+    console.log('Response:', response, 'error', error)
 
     const changeHandler = (e) => {
         if (e.target.value) {

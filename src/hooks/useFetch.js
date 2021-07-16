@@ -35,11 +35,11 @@ const useFetch = url => {
                 setError(null)
                 setResponse(res)
             }
-        }).catch(error => {
+        }).catch((error) => {
             if (!skipGetResponseAfterDestroy) {
                 setIsLoading(false)
+                setError(error.response)
                 setResponse(null)
-                setError(error)
             }
         })
 

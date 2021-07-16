@@ -24,8 +24,8 @@ function ResponseInfo() {
         },
     ]
     const contentListNoTitle = {
-        body: <pre className={styles.pre}>{res ? JSON.stringify(res.data || res, null, 4) : 'Response'}</pre>,
-        headers: <pre className={styles.pre}>{res ? JSON.stringify(res.headers, null, 4) : 'Headers'}</pre>,
+        body: <pre className={styles.pre}>{JSON.stringify(res?.data || error?.data?.errors , null, 4) || 'Response'}</pre>,
+        headers: <pre className={styles.pre}>{JSON.stringify(res?.headers || error?.headers, null, 4) || 'Headers'}</pre>,
         cookies: <p>cookies content</p>,
     }
 
@@ -39,9 +39,7 @@ function ResponseInfo() {
             style={{width: '100%'}}
             tabList={tabListNoTitle}
             activeTabKey={state.noTitleKey}
-            tabBarExtraContent={res?.status
-                ? <p>Status: <span style={{color: (res.status === 200 ? 'green' : 'red')}}>{res?.status}</span></p>
-                : <p style={{color: "red"}}>{error?.message}</p>}
+            tabBarExtraContent={<p>Status: <span style={{color: (res?.status ? 'green' : 'red')}}>{res?.status || error?.status}</span></p>}
             onTabChange={key => {
                 onTabChange(key, 'noTitleKey')
             }}
