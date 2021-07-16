@@ -1,9 +1,9 @@
 import {Layout, Menu, Breadcrumb} from 'antd'
 import {DesktopOutlined, PieChartOutlined, FileOutlined, TeamOutlined, UserOutlined} from '@ant-design/icons'
 import {useState} from "react"
-import QueryParams from "./components/queryparams/QueryParams"
-import ParamsReceiver from "./components/params-receiver/ParamsReceiver"
+import UrlReceiver from "./components/url-receiver/UrlReceiver"
 import ResponseInfo from "./components/response-info/ResponseInfo"
+import ParamsReceiver from "./components/params-receiver/ParamsReceiver"
 
 const {Content, Footer, Sider} = Layout
 const {SubMenu} = Menu
@@ -48,8 +48,8 @@ function App() {
                         <Breadcrumb.Item>Bill</Breadcrumb.Item>
                     </Breadcrumb>
                     <div className="site-layout-background" style={{padding: 24, minHeight: 360}}>
+                        <UrlReceiver/>
                         <ParamsReceiver/>
-                        <QueryParams/>
                         <ResponseInfo/>
                     </div>
                 </Content>

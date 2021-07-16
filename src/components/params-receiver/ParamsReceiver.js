@@ -1,39 +1,53 @@
-import DropdownMenu from "../dropdown/DropdownMenu"
-import {Button, Input} from "antd"
-import {useDispatch, useSelector} from "react-redux"
-import {setError, setResponse, setUrl} from "../../reducers/queryReducer"
-import useFetch from "../../hooks/useFetch"
-import {useEffect} from "react"
+import {Card} from 'antd'
+import {useState} from "react"
+import QueryParams from "../queryparams/QueryParams"
+
 
 function ParamsReceiver() {
-    const dispatch = useDispatch()
-    const url = useSelector(state => state.query.url)
-    const [{isLoading, response, error}, doFetch] = useFetch(url)
-    console.log('Response:', response, 'error', error)
+    const [state, setState] = useState({key: 'params', noTitleKey: 'params',})
 
-    const changeHandler = (e) => {
-        if (e.target.value) {
-            dispatch(setUrl(e.target.value))
+    const tabListNoTitle = [
+        {
+            key: 'params',
+            tab: 'Params',
+        },
+        {
+            key: 'authorization',
+            tab: 'Authorization',
+        },
+        {
+            key: 'headers',
+            tab: 'Headers',
+        },
+        {
+            key: 'body',
+            tab: 'Body',
         }
+    ]
+    const contentListNoTitle = {
+        params: <QueryParams/>,
+        authorization: <p>auth</p>,
+        headers: <p>headers</p>,
+        body: <p>body</p>,
     }
 
-    const clickHandler = () => {
-        if (url) {
-            doFetch()
-        }
+    const onTabChange = (key, type) => {
+        setState({[type]: key})
     }
 
-    useEffect(() => {
-        dispatch(setResponse(response))
-        dispatch(setError(error))
-    })
 
     return (
-        <div style={{display: 'flex'}}>
-            <DropdownMenu/>
-            <Input placeholder="Enter request URL" onChange={e => changeHandler(e)} value={url}/>
-            <Button disabled={isLoading} onClick={clickHandler} type='primary'>Send</Button>
-        </div>
+        <Card
+            style={{width: '100%'}}
+            tabList={tabListNoTitle}
+            activeTabKey={state.noTitleKey}
+            tabBarExtraContent={<a href='#'>Unimplemented feature</a>}
+            onTabChange={key => {
+                onTabChange(key, 'noTitleKey')
+            }}
+        >
+            {contentListNoTitle[state.noTitleKey]}
+        </Card>
     )
 }
 
