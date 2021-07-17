@@ -13,7 +13,6 @@ const initialState = {
     },
     error: null,
     response: null,
-    params: []
 }
 
 

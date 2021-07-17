@@ -23,8 +23,10 @@ function UrlReceiver() {
     }
 
     useEffect(() => {
-        dispatch(setResponse(response))
-        dispatch(setError(error))
+        if (response || error) {
+            dispatch(setResponse(response))
+            dispatch(setError(error))
+        }
     }, [response, error, dispatch])
 
     return (
