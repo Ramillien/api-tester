@@ -36,6 +36,7 @@ export function getNewParams(e, params) {
 }
 
 export function arrToQueryString(arr){
-    const newArr = arr.map(el => `${el.key}=${el.value}`).join('&')
+    const newArr = arr.map(el => el.key || el.value ? `${(el.key !== false) && el.key}${el.value && ('='+el.value)}` : null).join('&')
+    console.log('newArr',newArr)
     return `?${newArr}`
 }

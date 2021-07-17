@@ -11,9 +11,7 @@ function UrlReceiver() {
     const [{isLoading, response, error}, doFetch] = useFetch(url)
 
     const changeHandler = (e) => {
-        if (e.target.value) {
             dispatch(setUrl(e.target.value))
-        }
     }
 
     const clickHandler = () => {

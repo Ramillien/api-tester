@@ -17,7 +17,9 @@ function QueryParams() {
             const queryParams = searchQueryParams(url)
             const parsed = queryString.parse(queryParams.query)
             const arr = objToArray(parsed)
-            arr.length !== 0 && setParams(arr)
+            if(arr.length !== 0){
+                setParams(arr)
+            }
         }
     }, [url])
 
@@ -27,7 +29,7 @@ function QueryParams() {
         const {baseUrl} = searchQueryParams(url)
         dispatch(setUrl(baseUrl+arrToQueryString(newParams)))
     }
-
+    console.log(params)
     const getList = (data = []) => {
         return data.map((item, id) => (
             item.key || item.value ?
@@ -66,7 +68,7 @@ function QueryParams() {
                 <Col className={styles.table} span={8}>VALUE</Col>
                 <Col className={styles.table} span={8}>DESCRIPTION</Col>
             </Row>
-            {params && getList(params)}
+            {params.length !== 0 ? getList(params) : null}
         </div>
 
     )
