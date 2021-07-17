@@ -14,6 +14,7 @@ function QueryParams() {
 
     useEffect(() => {
         if (url) {
+            console.log('refresh')
             const queryParams = searchQueryParams(url)
             const parsed = queryString.parse(queryParams.query)
             const arr = objToArray(parsed)
@@ -27,9 +28,10 @@ function QueryParams() {
         const newParams = getNewParams(e, params)
         setParams(newParams)
         const {baseUrl} = searchQueryParams(url)
+        console.log('newURL: ', baseUrl+arrToQueryString(newParams))
         dispatch(setUrl(baseUrl+arrToQueryString(newParams)))
     }
-    console.log(params)
+
     const getList = (data = []) => {
         return data.map((item, id) => (
             item.key || item.value ?

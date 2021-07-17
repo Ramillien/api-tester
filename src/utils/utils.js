@@ -35,8 +35,9 @@ export function getNewParams(e, params) {
     return newParams
 }
 
-export function arrToQueryString(arr){
-    const newArr = arr.map(el => el.key || el.value ? `${(el.key !== false) && el.key}${el.value && ('='+el.value)}` : null).join('&')
-    console.log('newArr',newArr)
-    return `?${newArr}`
+export function arrToQueryString(arr=[]){
+    const newQuery = arr.filter(el => el.key || el.value)
+        .map(el =>`&${el.key || ''}${el.value ? '='+el.value : ''}`)
+        .join('')
+    return `?${newQuery}`
 }
