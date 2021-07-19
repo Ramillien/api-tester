@@ -11,6 +11,7 @@ const initialState = {
             method: 'GET'
         }
     },
+    params: [],
     error: null,
     response: null,
 }

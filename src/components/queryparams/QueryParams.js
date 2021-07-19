@@ -1,32 +1,30 @@
 import {Col, Row} from "antd"
 import styles from './query-params.module.css'
 import {useDispatch, useSelector} from "react-redux"
-import {arrToQueryString, getNewParams, objToArray, searchQueryParams} from "../../utils/utils"
-import queryString from 'query-string'
-import {setUrl} from "../../reducers/queryReducer"
-import {useEffect, useState} from "react"
+import {arrToQueryString, getNewParams, searchQueryParams, urlToArrOfParams} from "../../utils/utils"
+import {setQueryParams, setUrl} from "../../reducers/queryReducer"
+import {useEffect} from "react"
 
 
 function QueryParams() {
     const dispatch = useDispatch()
     const url = useSelector(state => state.query.url)
-    const [params, setParams] = useState([])
+    const params = useSelector(state => state.query.params)
 
     useEffect(() => {
         if (url) {
-            console.log('refresh')
-            const queryParams = searchQueryParams(url)
-            const parsed = queryString.parse(queryParams.query)
-            const arr = objToArray(parsed)
+            const arr = urlToArrOfParams(url)
             if(arr.length !== 0){
-                setParams(arr)
+                dispatch(setQueryParams(arr))
             }
+        }else{
+            dispatch(setQueryParams([]))
         }
-    }, [url])
+    }, [url,dispatch])
 
     const changeHandler = (e) => {
         const newParams = getNewParams(e, params)
-        setParams(newParams)
+        dispatch(setQueryParams(newParams))
         const {baseUrl} = searchQueryParams(url)
         console.log('newURL: ', baseUrl+arrToQueryString(newParams))
         dispatch(setUrl(baseUrl+arrToQueryString(newParams)))

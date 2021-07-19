@@ -1,16 +1,14 @@
-import React, {useState} from 'react'
 import {Menu, Dropdown, Button, Space} from 'antd'
 import {DownOutlined, UserOutlined} from '@ant-design/icons'
 import {setMethod} from "../../reducers/queryReducer"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 
 function DropdownMenu() {
-    const [name, setName] = useState('GET')
+    const method = useSelector(state => state.query.options.headers.method)
     const dispatch = useDispatch()
 
     function handleMenuClick(e) {
         if (e.domEvent.target.innerText) {
-            setName(e.domEvent.target.innerText)
             dispatch(setMethod(e.domEvent.target.innerText))
         }
     }
@@ -33,7 +31,7 @@ function DropdownMenu() {
         <Space wrap>
             <Dropdown overlay={menu}>
                 <Button>
-                    {name} <DownOutlined/>
+                    {method} <DownOutlined/>
                 </Button>
             </Dropdown>
         </Space>
