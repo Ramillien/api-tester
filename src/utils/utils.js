@@ -1,3 +1,5 @@
+import queryString from "query-string"
+
 export function searchQueryParams(url) {
     let query = null
     let baseUrl = null
@@ -14,7 +16,7 @@ export function searchQueryParams(url) {
     return {query, baseUrl}
 }
 
-export function objToArray(obj){
+function objToArray(obj){
     return Object.keys(obj).map(key => {
         return  { key: (key && key), value: (obj[key] && obj[key]) , desc: ''}
     })
@@ -40,4 +42,11 @@ export function arrToQueryString(arr=[]){
         .map(el =>`&${el.key || ''}${el.value ? '='+el.value : ''}`)
         .join('')
     return `?${newQuery}`
+}
+
+export function urlToArrOfParams(url) {
+    const queryParams = searchQueryParams(url)
+    const parsed = queryString.parse(queryParams.query)
+    return objToArray(parsed)
+
 }

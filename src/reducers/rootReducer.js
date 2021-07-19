@@ -3,17 +3,17 @@ import queryReducer from "./queryReducer"
 import {composeWithDevTools} from "redux-devtools-extension"
 import thunk from "redux-thunk"
 
-const saveToLocalstorage = (state) => {
+const saveToSessionStorage = (state) => {
     try{
-        localStorage.setItem('state', JSON.stringify(state))
+        sessionStorage.setItem('state', JSON.stringify(state))
     } catch (e) {
         console.log(e)
     }
 }
 
-const loadFromLocalstorage = () => {
+const loadFromSessionStorage = () => {
     try {
-        const stateStr = localStorage.getItem('state')
+        const stateStr = sessionStorage.getItem('state')
         return stateStr ? JSON.parse(stateStr) : undefined
     } catch (e) {
         console.log(e)
@@ -25,12 +25,12 @@ const rootReducer = combineReducers({
     query: queryReducer
 })
 
-const persistedStore = loadFromLocalstorage()
+const persistedStore = loadFromSessionStorage()
 
 
 export const store = createStore(rootReducer, persistedStore, composeWithDevTools(applyMiddleware(thunk)))
 
 store.subscribe(() => {
-    saveToLocalstorage(store.getState())
+    saveToSessionStorage(store.getState())
 })
 

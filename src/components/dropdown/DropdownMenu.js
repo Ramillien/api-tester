@@ -4,7 +4,7 @@ import {setMethod} from "../../reducers/queryReducer"
 import {useDispatch, useSelector} from "react-redux"
 
 function DropdownMenu() {
-    const method = useSelector(state => state.query.options.headers.method)
+    const method = useSelector(state => state.query.options.method)
     const dispatch = useDispatch()
 
     function handleMenuClick(e) {

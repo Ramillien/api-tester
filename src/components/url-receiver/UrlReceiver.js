@@ -8,6 +8,7 @@ import {useEffect} from "react"
 function UrlReceiver() {
     const dispatch = useDispatch()
     const url = useSelector(state => state.query.url)
+    const options = useSelector(state => state.query.options)
     const [{isLoading, response, error}, doFetch] = useFetch(url)
 
     const changeHandler = (e) => {
@@ -16,7 +17,7 @@ function UrlReceiver() {
 
     const clickHandler = () => {
         if (url) {
-            doFetch()
+            doFetch(options)
         }
     }
 
@@ -30,7 +31,10 @@ function UrlReceiver() {
     return (
         <div style={{display: 'flex'}}>
             <DropdownMenu/>
-            <Input placeholder="Enter request URL" onChange={e => changeHandler(e)} value={url}/>
+            <Input placeholder="Enter request URL"
+                   onChange={e => changeHandler(e)}
+                   onKeyDown={e => e.key === 'Enter' && clickHandler(e)}
+                   value={url}/>
             <Button disabled={isLoading} onClick={clickHandler} type='primary'>Send</Button>
         </div>
     )
