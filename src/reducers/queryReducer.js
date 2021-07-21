@@ -1,9 +1,9 @@
-const SET_PARAMS = 'SET_PARAMS'
+// const SET_PARAMS = 'SET_PARAMS'
 const SET_URL = 'SET_URL'
 const SET_RESPONSE = 'SET_RESPONSE'
 const SET_ERROR = 'SET_ERROR'
 const SET_METHOD = 'SET_METHOD'
-const SET_HEADERS = 'SET_HEADERS'
+// const SET_HEADERS = 'SET_HEADERS'
 
 const initialState = {
     url: '',
@@ -38,10 +38,10 @@ export default function queryReducer(state = initialState, action) {
     }
 }
 
-export const setQueryParams = (params) => ({type: SET_PARAMS, payload: params})
+// export const setQueryParams = (params) => ({type: SET_PARAMS, payload: params})
 export const setUrl = (url) => ({type: SET_URL, payload: url})
 export const setResponse = (response) => ({type: SET_RESPONSE, payload: response})
 export const setError = (error) => ({type: SET_ERROR, payload: error})
 export const setMethod = (method) => ({type: SET_METHOD, payload: method})
-export const setHeaders = (headers) => ({type: SET_HEADERS, payload: headers})
+// export const setHeaders = (headers) => ({type: SET_HEADERS, payload: headers})
 

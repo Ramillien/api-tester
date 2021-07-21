@@ -4,8 +4,8 @@ export function searchQueryParams(url) {
     let query = null
     let baseUrl = null
 
-    for(let i = 0; i < url.length; i++) {
-        if (url[i] === "?"){
+    for (let i = 0; i < url.length; i++) {
+        if (url[i] === "?") {
             // console.log('indexOf',url.indexOf(url[i]))
             query = url.slice(url.indexOf(url[i]), url.length)
             baseUrl = url.slice(0, url.indexOf(url[i]))
@@ -16,11 +16,8 @@ export function searchQueryParams(url) {
     return {query, baseUrl}
 }
 
-function objToArray(obj){
-    return Object.keys(obj).map(key => {
-        return  { key: (key && key), value: (obj[key] && obj[key]) , desc: ''}
-    })
-
+function objToArray(obj) {
+    return Object.keys(obj).map(key => ({key: (key || ''), value: (obj[key] || ''), desc: ''})) || null
 }
 
 export function getNewParams(e, params) {
@@ -31,16 +28,14 @@ export function getNewParams(e, params) {
         }else {
             return newParams.push(item)
         }
-        // return setParams([...params, ...params[id]])
-
     })
     return newParams
 }
 
-export function arrToQueryString(arr=[]){
+export function arrToQueryString(arr = []) {
     const newQuery = arr.filter(el => el.key || el.value)
-        .map(el =>`&${el.key || ''}${el.value ? '='+el.value : ''}`)
-        .join('')
+    .map(el => `${el.key || ''}${el.value ? '=' + el.value : ''}`)
+    .join('&')
     return `?${newQuery}`
 }
 
@@ -48,5 +43,4 @@ export function urlToArrOfParams(url) {
     const queryParams = searchQueryParams(url)
     const parsed = queryString.parse(queryParams.query)
     return objToArray(parsed)
-
 }

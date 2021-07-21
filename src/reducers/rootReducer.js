@@ -30,7 +30,7 @@ const persistedStore = loadFromSessionStorage()
 
 export const store = createStore(rootReducer, persistedStore, composeWithDevTools(applyMiddleware(thunk)))
 
-store.subscribe(() => {
+window.onbeforeunload = () => {
     saveToSessionStorage(store.getState())
-})
+}
 
