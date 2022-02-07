@@ -1,46 +1,34 @@
-import queryString from "query-string"
-
-export function searchQueryParams(url) {
-    let query = null
-    let baseUrl = null
-
-    for (let i = 0; i < url.length; i++) {
-        if (url[i] === "?") {
-            // console.log('indexOf',url.indexOf(url[i]))
-            query = url.slice(url.indexOf(url[i]), url.length)
-            baseUrl = url.slice(0, url.indexOf(url[i]))
-            // console.log('query',query)
-            break
-        }
+export function getNewUrl(url = '') {
+    const baseUrl = url.split('?')[0]
+    try{
+        const queryString = new URL(url)
+        return {baseUrl, queryString}
+    }catch (e) {
+        const queryString = new URL('http://' + url)
+        return {baseUrl, queryString}
     }
-    return {query, baseUrl}
-}
-
-function objToArray(obj) {
-    return Object.keys(obj).map(key => ({key: (key || ''), value: (obj[key] || ''), desc: ''})) || null
 }
 
 export function getNewParams(e, params) {
-    const newParams = []
-    params.forEach((item, id) => {
-        if(id === Number(e.target.getAttribute('uniqueid'))) {
-            return newParams.push({key: e.target.attributes.linkto.value === 'key' ? e.target.value : item.key, value: e.target.attributes.linkto.value === 'value' ? e.target.value : item.value, desc: ''})
-        }else {
-            return newParams.push(item)
-        }
+    return params.map((item, id) => {
+        return id === Number(e.target.getAttribute('uniqueid'))
+        ? {...item, [e.target.attributes.linkto.value]: e.target.value}
+        : item
     })
-    return newParams
 }
 
 export function arrToQueryString(arr = []) {
     const newQuery = arr.filter(el => el.key || el.value)
-    .map(el => `${el.key || ''}${el.value ? '=' + el.value : ''}`)
-    .join('&')
+        .map(el => `${el.key || ''}${el.value ? '=' + el.value : ''}`)
+        .join('&')
     return `?${newQuery}`
 }
 
-export function urlToArrOfParams(url) {
-    const queryParams = searchQueryParams(url)
-    const parsed = queryString.parse(queryParams.query)
-    return objToArray(parsed)
+export function urlToArrOfParams(value) {
+    const {queryString} = getNewUrl(value)
+    let arr = []
+    for (const pair of queryString.searchParams.entries()) {
+        arr.push({key: pair[0] || '', value: pair[1] || '', desc: ''})
+    }
+    return arr
 }

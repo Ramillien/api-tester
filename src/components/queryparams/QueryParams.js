@@ -1,7 +1,7 @@
 import {Col, Row} from "antd"
 import styles from './query-params.module.css'
 import {useDispatch, useSelector} from "react-redux"
-import {arrToQueryString, getNewParams, searchQueryParams, urlToArrOfParams} from "../../utils/utils"
+import {arrToQueryString, getNewParams, getNewUrl, urlToArrOfParams} from "../../utils/utils"
 import {setUrl} from "../../reducers/queryReducer"
 import {useEffect, useState} from "react"
 
@@ -19,7 +19,7 @@ function QueryParams() {
 
     const changeHandler = (e) => {
         const newParams = getNewParams(e, params)
-        const {baseUrl} = searchQueryParams(url)
+        const {baseUrl} = getNewUrl(url)
         dispatch(setUrl(baseUrl + arrToQueryString(newParams)))
     }
 
@@ -29,21 +29,21 @@ function QueryParams() {
                 <Col className={styles.table} span={8}>
                     <input className={styles.input}
                            linkto='key'
-                           uniqueid={String(id)}
+                           uniqueid={id}
                            onChange={changeHandler}
                            value={item.key || ""}/>
                 </Col>
                 <Col className={styles.table} span={8}>
                     <input className={styles.input}
                            linkto='value'
-                           uniqueid={String(id)}
+                           uniqueid={id}
                            onChange={changeHandler}
                            value={item.value || ""}/>
                 </Col>
                 <Col className={styles.table} span={8}>
                     <input className={styles.input}
                            linkto='desc'
-                           uniqueid={String(id)}
+                           uniqueid={id}
                            onChange={changeHandler}
                            value={item.desc || ""}/>
                 </Col>
